@@ -1,12 +1,14 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aplikasi CRUD</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
-    <div class="container">
-    <h2>Aplikasi CRUD Menggunakan Flask</h2>
+<div class="container">
+    <h1>Aplikasi CRUD Python Menggunakan Flask</h1>
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -14,24 +16,27 @@
             <th>Nama Barang</th>
             <th>Harga</th>
             <th>Jumlah</th>
-            <th width="18%" colspan="2">Aksi</th>
+            <th>Aksi</th>
         </tr>
         </thead>
-
-             <tbody>
-                {% for row in container %}
-                <tr>
-                    <td>{{ row[1] }}</td>
-                    <td>{{ row[2] }}</td>
-                    <td>{{ row[3] }}</td>
-                    <td>{{ row[4] }}</td>
-                    <td><a href="http://localhost:5000/edit/{{ row[0] }}" class="btn btn-warning" role="button">Ubah</a></td>
-                    <td><a href="http://localhost:5000/hapus/{{ row[0] }}" class="btn btn-danger" role="button">Hapus</a></td>
-                </tr>
-            {% endfor %}
-             </tbody>
+        <tbody>
+        {% for barang in barang %}
+        <tr>
+            <td>{{ barang[0] }}</td>
+            <td>{{ barang[1] }}</td>
+            <td>{{ barang[2] }}</td>
+            <td>{{ barang[3] }}</td>
+            <td>
+                <a href="/edit/{{ barang[0] }}" class="btn btn-primary btn-sm">Ubah</a>
+                <form action="/hapus/{{ barang[0] }}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
     </table>
-    <a href="http://localhost:5000/tambah" class="btn btn-primary" role="button">Tambah Data</a>
-    </div>
+    <a href="/tambah" class="btn btn-primary">Tambah Barang</a>
+</div>
 </body>
 </html>
